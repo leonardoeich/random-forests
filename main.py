@@ -4,16 +4,13 @@ from math import log2
 # this is for importing the decisionTree file and
 # be able to execute its functions from here
 from decisionTree import testfun
+from bootstrap import bootstrap
 
 def main():
-
-    # and here I'm simply adding an exemple for you to see,
-    # but feel free to remove it
-    testfun()
-
     # 1. get data ready
     data = pd.read_csv("./data/dadosBenchmark_validacaoAlgoritmoAD.csv", sep = ';')
     #print(data)
+    bootstrap(data)
 
     # Create X (features matrix)
     X = data.drop("Joga", axis = 1)
