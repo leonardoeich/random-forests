@@ -1,0 +1,4 @@
+I'll just add here some things that we need to install for the application
+to work, so we can provide a configuration file to the professor.
+I guess that this is a requirement for the final version of our work too.
+pip3 install pandas
