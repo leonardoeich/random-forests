@@ -10,8 +10,9 @@ from utils import attributeSelection
 def main():
     # 1. get data ready
     data = pd.read_csv("./data/dadosBenchmark_validacaoAlgoritmoAD.csv", sep = ';')
-    #print(data)
+    print(data)
     boot = bootstrap(data)
+    print(boot)
 
     # given the generated boot, now we need to sample m attributes
     # based on information gain to train our DT

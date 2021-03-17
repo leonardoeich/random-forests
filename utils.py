@@ -24,4 +24,4 @@ def attributeSelection(data):
     #for i in range(0, round(m)):
         #entropyValues[i] = entropy(header[i], data)
 
-    print(header[entropyValues.index(max(entropyValues))])
+    print(header[entropyValues.index(min(entropyValues))])
