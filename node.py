@@ -1,8 +1,9 @@
 class Node:
-  def __init__(self, is_leaf, attributes):
-    self.is_leaf = is_leaf
-    self.attributes = attributes
+  def __init__(self):
+    self.is_leaf = False
+    self.attributes = None
     self.label = None
+    self.branches = []
 
   def teste(self):
     print(self.attributes)
