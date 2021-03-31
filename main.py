@@ -1,12 +1,13 @@
+import sys
 import pandas as pd
 from node import Node
 from math import log2
 from math import sqrt
 import random
 
+
 # this is for importing the decisionTree file and
 # be able to execute its functions from here
-from decisionTree import testfun
 from decisionTree import isOnlyOneClass
 from utils import bootstrap
 from utils import attributeSelection
@@ -53,12 +54,10 @@ def main():
   #print(data.columns.values.tolist())
   
   # randomly selecting the square root of #attributes
-  attributes = list(data.columns)
+  #attributes = list(data.columns)
   #attributes.remove('Temperatura')
-  print(attributes)
-  attributes.remove('Temperatura')
-  print(attributes)
-
+  #print(attributes)
+  #attributes.remove('Temperatura')
 
 
 main()

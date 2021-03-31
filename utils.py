@@ -2,6 +2,11 @@ import pandas as pd
 import random
 from math import sqrt
 
+def get_unique_values(dataset, target_column):
+  y = training_data[target_column]
+  unique_values = y.unique()
+  return unique_values
+
 def prob_of_class(target_column, class_name, data_set):
   # get all unique values from a given column
   y = data_set[target_column]

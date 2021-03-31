@@ -1,8 +1,7 @@
 import pandas as pd
 from node import Node
 from math import log2
-from utils import attributeSelection
-from utils import entropy
+from utils import *
 
 
 def isOnlyOneClass(training_data, target_column):
@@ -20,26 +19,32 @@ def getMajorityClass(training_data, target_colum):
   #get most frequent element in a pandas series
   return (y.mode().iloc[0])
 
+def isBaseCase(training_data, target_column, attributes):
+  if (isOnlyOneClass(training_data, target_column)) or (len(attributes) == 0):
+    return True
+  else:
+    return False
 
 def decisionTreeClassifier(training_data, attributes, target_column):
-  node_entropy = entropy(target_column, training_data)
   node = Node()
+  node_entropy = entropy(target_column, training_data)
 
-  #if all examples in the current dataset belong to the same class, return the node as a leaf
-  if isOnlyOneClass(training_data, target_column):
+  #if all examples in the current dataset belong to the same class or attribute list is empty, return the node as a leaf
+  if isBaseCase(training_data, target_column, attributes):
     node.is_leaf = True
     node.label = getMajorityClass(training_data, target_column)
     return node
-  #if the attribute list is empty, return the majority class of the training data
-  elif (len(attributes) == 0):
-    return getMajorityClass(training_data, target_column)
-
   #select attribute with best split criteria
   else:
     best_attribute = attributeSelection(training_data, attributes, target_column, node_entropy)
-    attributes.remove(best_attribute) #remove the used attribute from attributes list
-    #TODO
-  
-
-def testfun():
-  print("relou\n")
+    node.attribute = best_attribute
+    attributes.remove(best_attribute) #remove used attribute from attributes list
+    #for each unique value of the selected attribute, 
+    attribute_values = get_unique_values(training_data, best_attribute)
+    for attribute_value in attribute_values:
+      value_sub_set = training_data[training_data[best_attribute] == attribute_value]
+      if len(value_sub_set) > 0:
+        node.branches.append(decisionTreeClassifier(value_sub_set, attributes, target_column))
+      else:
+        ##TODO
+        pass
