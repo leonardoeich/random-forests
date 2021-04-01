@@ -1,0 +1,34 @@
+# -*- mode: org -*-
+# -*- coding: utf-8 -*-
+#+TITLE: A Random Forests python Implementation - Machine Learning Course
+#+AUTHOR: Valéria S. Girelli
+#+LATEX_HEADER: \usepackage[margin=2cm,a4paper]{geometry}
+#+STARTUP: overview indent
+#+TAGS: noexport(n) deprecated(d)
+#+EXPORT_SELECT_TAGS: export
+#+EXPORT_EXCLUDE_TAGS: noexport
+#+SEQ_TODO: TODO(t!) STARTED(s!) WAITING(w!) | DONE(d!) CANCELLED(c!) DEFERRED(f!)
+
+* Random Forests
+
+This repository holds the a Random Forests implementation in python, applying the ensemble learning method and stratified cross-validation. This implementation works for both nimerical and categorical attributes. The work is part of the Machine Learning course on the Informatics Institute, at UFRGS.
+
+The objective is to provide an original implementation and to analyze the impact that some parameters have upon the model performance. More specifically, we aim to optimize the number of trees on the ensemble method.
+
+* Required libraries
+You might need to install some libraries on your system:
+#+BEGIN_SRC 
+pip3 install pandas
+pip3 install numpy
+#+END_SRC
+
+* Usage and input files
+To run the application you must inform the input file that contains the dataset and an additional file containing the type (numerical or categorical) of each attribute:
+#+BEGIN_SRC 
+python3 main.py <file_name> <attribute_type_file>
+#+END_SRC
+
+The file containing the attributes types can be a simple text file and  must present a line for each attribute and its type in the following manner:
+#+BEGIN_SRC 
+<attribute name> <numerical/categorica>
+#+END_SRC
