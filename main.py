@@ -14,7 +14,15 @@ from utils import attributeSelection
 
 def main():
   # 1. get data ready
-  data = pd.read_csv("./data/dadosBenchmark_validacaoAlgoritmoAD.csv", sep = ';')
+  if (len(sys.argv) != 3):
+      print("Missing arguments! Execute:\npython3 main.py <file_name> <attribute_type_file>")
+      exit()
+
+  finput = sys.argv[1]
+  types_file = sys.argv[2]
+
+  #data = pd.read_csv("./data/dadosBenchmark_validacaoAlgoritmoAD.csv", sep = ';')
+  data = pd.read_csv(finput, sep = ';')
   #print(data)
   #boot = bootstrap(data)
   #print(boot)
