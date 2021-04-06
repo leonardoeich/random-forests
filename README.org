@@ -34,7 +34,7 @@ To run the application you must inform the input file that contains
 the dataset and an additional file containing the type (numerical or
 categorical) of each attribute: 
 #+BEGIN_SRC 
-python3 main.py <file_name> <attribute_type_file>
+python3 main.py <file_name> <attribute_type_file> separator
 #+END_SRC
 
 The file containing the attributes types can be a simple text file and
