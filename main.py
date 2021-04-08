@@ -12,7 +12,7 @@ from pandas.api.types import is_numeric_dtype
 
 # this is for importing the decisionTree file and
 # be able to execute its functions from here
-from decisionTree import isOnlyOneClass
+from decisionTree import *
 from utils import bootstrap
 from utils import attributeSelection
 
@@ -27,15 +27,19 @@ def main():
   #finput = sys.argv[1]
   #types_file = sys.argv[2]
 
-  data = pd.read_csv("./data/dadosBenchmark_validacaoAlgoritmoAD.csv", sep = ';')
-  attribute_types = pd.read_csv("./data/dadosBenchmark_validacaoAlgoritmoAD_types.csv", sep="\t")
+  #data = pd.read_csv("./data/dadosBenchmark_validacaoAlgoritmoAD.csv", sep = ';')
+  #attribute_types = pd.read_csv("./data/dadosBenchmark_validacaoAlgoritmoAD_types.csv", sep="\t")
+  data = pd.read_csv("./data/wine_recognition.tsv", sep = '\t')
+  attribute_types = pd.read_csv("./data/wine_recognition_types.tsv", sep="\t")
 
-  
+  # Create X (features matrix)
+  #X = data.drop("Joga", axis = 1)
+
   data_dict = {}
   data_types = {}
   columns = list(data.columns.values)
   for attribute in columns:
-    data_dict[attribute] = data[attribute].unique()
+    data_dict[attribute] = list(data[attribute].unique())
     data_types[attribute] = attribute_types[attribute].unique()[0]
   
   
@@ -56,40 +60,19 @@ def main():
 
   # create Y (labels)
   #y = data["Joga"]
-
-  #print(list(X.columns.values))
-  #lista = y.unique()
-  #print(y.value_counts()["Nao"])
-
-  #for item in lista:
-      #print(item)
-      #print('aaa')
-  #list(my_dataframe.columns.values)
-
-
-  #df.word.value_counts()['myword']
-  print(data)
-  print(data_types)
-  #print(data["Joga"].value_counts())
-  #print(y.mode().iloc[0])
-  #print(data["Tempo"].mode().iloc[0])
-  #print(y.mode().iloc[0])
-  #print ("testeee")
-  #df1 = data[data['Joga'] == "Sim"]
-  #print(df1)
-  #print (isOnlyOneClass(df1, "Joga"))
-
-  #print(data['Joga'].value_counts()[:1].index.tolist()[0])
-  #print(data.columns.values.tolist())
+  #columns.remove('Joga')
+  tree = decisionTreeClassifier(data, columns, 'target', data_dict, data_types)
+  print_tree(tree)
   
-  # randomly selecting the square root of #attributes
-  #attributes = list(data.columns)
-  #attributes.remove('Temperatura')
-  #print(attributes)
-  #attributes.remove('Temperatura')
-  #print(data_dict)
 
-
-
-
+  #testes = [['Ensolarado', 'Quente', 'Alta', 'Falso'],
+  #          ['Ensolarado', 'Fria', 'Normal', 'Falso']]
+  
+  #a = data_dict['Tempo']
+  #print(a)
+  #print(data)
+  #result = predict(tree, testes[1], list(data.columns.values), data_dict)
+  #print(result)
+  #print(data["1"])
+  
 main()
