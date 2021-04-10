@@ -13,30 +13,38 @@ from pandas.api.types import is_numeric_dtype
 # this is for importing the decisionTree file and
 # be able to execute its functions from here
 from decisionTree import *
-from utils import bootstrap
-from utils import attributeSelection
+from utils import *
+from randomForest import *
 
 def main():
   #this is used to make sure all results are reproducible
   np.random.seed(42)
-  # 1. get data ready
-  #if (len(sys.argv) != 3):
-    #print("Missing arguments! Execute:\npython3 main.py <file_name> <separator> <attribute_type_file> <separator>")
-    #print("Missing arguments! Execute:\npython3 main.py data /t data_attributes ;")
   
-  #    exit()
+  # 1. get data ready
+  
+  if (len(sys.argv) != 8):  
+    print("Missing arguments! Execute:\npython3 main.py <file_name> <$'separator'> <attribute_type_file> <$'separator'> <target> <ntrees> <max_depth>")
+    #print("Missing arguments! Execute:\npython3 main.py data /t data_attributes ;")
+    exit()
+  
+  data_file = sys.argv[1]
+  data_sep = sys.argv[2]
+  types_file = sys.argv[3]
+  types_sep = sys.argv[4]
+  target = sys.argv[5]
+  ntrees = int(sys.argv[6])
+  max_depth = int(sys.argv[7])
 
-  #finput = sys.argv[1]
-  #types_file = sys.argv[2]
-
-  #data = pd.read_csv("./data/dadosBenchmark_validacaoAlgoritmoAD.csv", sep = ';')
+  #read files
+  data = pd.read_csv(data_file, sep = data_sep)
+  attribute_types = pd.read_csv(types_file, sep = types_sep)
   #attribute_types = pd.read_csv("./data/dadosBenchmark_validacaoAlgoritmoAD_types.csv", sep="\t")
-  data = pd.read_csv("./data/wine_recognition.tsv", sep = '\t')
-  attribute_types = pd.read_csv("./data/wine_recognition_types.tsv", sep="\t")
+  #data = pd.read_csv("./data/dadosBenchmark_validacaoAlgoritmoAD.csv", sep = ';')
 
-  # Create X (features matrix)
-  #X = data.drop("Joga", axis = 1)
+  #data = pd.read_csv("./data/wine_recognition.tsv", sep = '\t')
+  #attribute_types = pd.read_csv("./data/wine_recognition_types.tsv", sep="\t")
 
+  print(data_sep)
   data_dict = {}
   data_types = {}
   columns = list(data.columns.values)
@@ -44,33 +52,10 @@ def main():
     data_dict[attribute] = list(data[attribute].unique())
     data_types[attribute] = attribute_types[attribute].unique()[0]
   
-  
+  ac = randomForest(ntrees, data, columns, target, data_dict, data_types, max_depth, 10)
+  print("MEAN ACCURACY = " + str(ac))
   
 
-  #data = pd.read_csv(finput, sep = ';')
-  #data = pd.read_csv("./data/wine_recognition.tsv", sep = ';')
-  #print(data)
-  #boot = bootstrap(data)
-  #print(boot)
-
-  # given the generated boot, now we need to sample m attributes
-  # based on information gain to train our DT
-  #attributeSelection(boot)
-
-  # Create X (features matrix)
-  #X = data.drop("Joga", axis = 1)
-  # create Y (labels)
-  #y = data['target'] 
-  ''''
-  columns.remove('target')
-  tree = decisionTreeClassifier(data, columns, 'target', data_dict, data_types, 10)
-  a = [[1,2,3,4], [1,2,3,4], [1,2,3,4], [1,2,3,4]]
-  b = a[:2] + a[5:]
-  print(a)
-  print(b)
-  '''
-  folds = generate_k_folds(data, 'target', 10)
-  for i in range(10):
-    print(folds[i])
   
+
 main()

@@ -4,9 +4,23 @@ import random
 from math import sqrt
 from math import log2
 
+
+def get_data_ready(args):
+
+  data_file = args[1]
+  data_types = args[2]
+  target = args[3]
+  ntrees = int(args[4])
+  max_depth = int(args[5])
+
+  
+# find most frequent in a list 
+def most_frequent(List):
+  return max(set(List), key = List.count)
+
 # Get the unique values of an attribute, and it's used to create the child nodes.
-def get_unique_values(dataset, target_column):
-  y = dataset[target_column]
+def get_unique_values(data, column):
+  y = data[column]
   unique_values = y.unique()
   return unique_values
 
