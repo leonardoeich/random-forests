@@ -5,7 +5,7 @@ from math import log2
 from math import sqrt
 import random
 import numpy as np
-
+import random
 from pandas.api.types import is_string_dtype
 from pandas.api.types import is_numeric_dtype
 
@@ -17,6 +17,8 @@ from utils import bootstrap
 from utils import attributeSelection
 
 def main():
+  #this is used to make sure all results are reproducible
+  np.random.seed(42)
   # 1. get data ready
   #if (len(sys.argv) != 3):
     #print("Missing arguments! Execute:\npython3 main.py <file_name> <separator> <attribute_type_file> <separator>")
@@ -57,22 +59,18 @@ def main():
 
   # Create X (features matrix)
   #X = data.drop("Joga", axis = 1)
-
   # create Y (labels)
-  #y = data["Joga"]
-  #columns.remove('Joga')
-  tree = decisionTreeClassifier(data, columns, 'target', data_dict, data_types)
-  print_tree(tree)
-  
-
-  #testes = [['Ensolarado', 'Quente', 'Alta', 'Falso'],
-  #          ['Ensolarado', 'Fria', 'Normal', 'Falso']]
-  
-  #a = data_dict['Tempo']
-  #print(a)
-  #print(data)
-  #result = predict(tree, testes[1], list(data.columns.values), data_dict)
-  #print(result)
-  #print(data["1"])
+  #y = data['target'] 
+  ''''
+  columns.remove('target')
+  tree = decisionTreeClassifier(data, columns, 'target', data_dict, data_types, 10)
+  a = [[1,2,3,4], [1,2,3,4], [1,2,3,4], [1,2,3,4]]
+  b = a[:2] + a[5:]
+  print(a)
+  print(b)
+  '''
+  folds = generate_k_folds(data, 'target', 10)
+  for i in range(10):
+    print(folds[i])
   
 main()
