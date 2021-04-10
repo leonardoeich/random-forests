@@ -34,12 +34,15 @@ To run the application you must inform the input file that contains
 the dataset and an additional file containing the type (numerical or
 categorical) of each attribute: 
 #+BEGIN_SRC 
-python3 main.py <file_name> <attribute_type_file> separator
+python3 main.py <file_name> <separator> <attribute_type_file> <separator> <target> <ntrees> <max_depth>
+
+if you're using \t as a file separator, you need to pass in the following way: $'\t'
 #+END_SRC
 
-The file containing the attributes types can be a simple text file and
-must present a line for each attribute and its type in the following
+The file containing the attributes types must be a csv file and
+must present a row for each attribute and its type in the following
 manner: 
 #+BEGIN_SRC 
-<attribute name> <numerical/categorical>
+<attribute_1> | <attribute_2> 
+  <cat>       |    <num> 
 #+END_SRC
