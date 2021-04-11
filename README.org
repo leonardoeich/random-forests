@@ -32,15 +32,17 @@ pip3 install numpy
 * Usage and input files
 To run the application you must inform the input file that contains
 the dataset and an additional file containing the type (numerical or
-categorical) of each attribute: 
+categorical) of each attribute. You also need to inform the separator
+of each file, for instance, if you're using \t as a file separator,
+you need to pass it as argument in the following manner: $'\t'. The
+last three arguments indicate the target attribute, the number of
+trees on the Ensemble, and the maximum tree depth.
 #+BEGIN_SRC 
 python3 main.py <file_name> <separator> <attribute_type_file> <separator> <target> <ntrees> <max_depth>
-
-if you're using \t as a file separator, you need to pass in the following way: $'\t'
 #+END_SRC
 
 The file containing the attributes types must be a csv file and
-must present a row for each attribute and its type in the following
+must present a column for each attribute and its type in the following
 manner: 
 #+BEGIN_SRC 
 <attribute_1> | <attribute_2> 
