@@ -21,10 +21,8 @@ def main():
   np.random.seed(42)
   
   # 1. get data ready
-  
   if (len(sys.argv) != 8):  
     print("Missing arguments! Execute:\npython3 main.py <file_name> <$'separator'> <attribute_type_file> <$'separator'> <target> <ntrees> <max_depth>")
-    #print("Missing arguments! Execute:\npython3 main.py data /t data_attributes ;")
     exit()
   
   data_file = sys.argv[1]
@@ -38,13 +36,7 @@ def main():
   #read files
   data = pd.read_csv(data_file, sep = data_sep)
   attribute_types = pd.read_csv(types_file, sep = types_sep)
-  #attribute_types = pd.read_csv("./data/dadosBenchmark_validacaoAlgoritmoAD_types.csv", sep="\t")
-  #data = pd.read_csv("./data/dadosBenchmark_validacaoAlgoritmoAD.csv", sep = ';')
-
-  #data = pd.read_csv("./data/wine_recognition.tsv", sep = '\t')
-  #attribute_types = pd.read_csv("./data/wine_recognition_types.tsv", sep="\t")
-
-  print(data_sep)
+  
   data_dict = {}
   data_types = {}
   columns = list(data.columns.values)
@@ -54,8 +46,6 @@ def main():
   
   ac = randomForest(ntrees, data, columns, target, data_dict, data_types, max_depth, 10)
   print("MEAN ACCURACY = " + str(ac))
-  
-
   
 
 main()

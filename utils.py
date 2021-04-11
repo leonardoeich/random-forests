@@ -3,16 +3,6 @@ import numpy as np
 import random
 from math import sqrt
 from math import log2
-
-
-def get_data_ready(args):
-
-  data_file = args[1]
-  data_types = args[2]
-  target = args[3]
-  ntrees = int(args[4])
-  max_depth = int(args[5])
-
   
 # find most frequent in a list 
 def most_frequent(List):

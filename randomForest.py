@@ -13,7 +13,7 @@ def randomForest(n_trees, data, attributes, target_column, data_dict, data_types
     test_data = folds[i].copy()
     train_partitions = folds[:i] + folds[i+1:]
     train_data = concatenate_partitions(train_partitions)
-    
+  
     #create n trees 
     random_forest = createRandomForest(n_trees, train_data, attributes.copy(), target_column, data_dict, data_types, max_depth, k)
 
@@ -30,9 +30,9 @@ def randomForest(n_trees, data, attributes, target_column, data_dict, data_types
 #creates a list of decision trees(a Random Forest)
 def createRandomForest(n_trees, train_data, attributes, target_column, data_dict, data_types, max_depth, k=10):
   #create n trees
-  boot_data = bootstrap(train_data)
   decision_trees = []
   for n in range (n_trees):
+    boot_data = bootstrap(train_data)
     decision_tree = decisionTreeClassifier(boot_data, attributes.copy(), target_column, data_dict, data_types, max_depth)
     decision_trees.append(decision_tree)
   return decision_trees
@@ -45,11 +45,9 @@ def ensemble(random_forest, test_data, attributes, target_column, data_dict, dat
     for tree in random_forest:
       prediction = predict(tree, row, attributes, data_dict, data_types)
       forest_labels.append(prediction)
-    
     #forest prediction is the most voted label
     forest_prediction = most_frequent(forest_labels)
     predicted_labels.append(forest_prediction)
-  
   return predicted_labels
 
 
